@@ -31,7 +31,7 @@ def draw_heatmap(data, xlabels, ylabels):
 
     #  获取二维数组中的 最大和最小两个值
     for i in data:  # 遍历二维数组，每次i获取到的是一维数组
-        for j in i:  # 遍历一维数组，每次j获取到的是一个数字
+        for j in i:  # 遍历一维数组，每次获取到的是一个数字
             if j > vmax:
                 vmax = j
             if j < vmin:
@@ -45,28 +45,17 @@ def draw_heatmap(data, xlabels, ylabels):
     plt.yticks(rotation=360)  # 纵轴将字体进行旋转 0 度
     plt.show()  # 显示图像
 
-def get_labels(num,label):
-    '''
-    获取一个数组
-    :param num: 数量
-    :param label: 标签前缀
-    :return: 数组
-    '''
-    arr = []
-    for i in range(0, num):
-        arr.append(label + str(i))
-    return arr
 
 # main 函数，程序的入口
 if __name__ == '__main__':
     # 从Excel 中读取数据
-    dataFrame = pd.read_excel('allRes2.xlsx', sheet_name="allRes2", encoding='gbk')
+    dataFrame = pd.read_excel('E:\\GEO_DOC\\2020年6月份\\月\\allRes2.xlsx', sheet_name="allRes2", encoding='gbk')
     # 从 dataFrame 中提取三行数据，列为mixedProportion，fromWin，toWin
     # 根据需求提取数据
     val1 = dataFrame.head(3)[['mixedProportion', 'fromWin', 'toWin']]
 
     # 坐标轴坐标名称，要和数据对的上哈
-    xlabels = get_labels(val1.shape[1], "x")  # shape 输出数组的行和列数
-    ylabels = get_labels(val1.shape[0], "y")
-    # 执行画热图的函数
+    xlabels = ['x1', 'x2', 'x3']
+    ylabels = ['y1', 'y2', 'y3']
+    # 执行画热泪图的函数
     draw_heatmap(val1.values, xlabels, ylabels)
